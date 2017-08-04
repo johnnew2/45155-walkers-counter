@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/animate.css">
+    <style>
+        
+        @font-face {
+            font-family: 'FuturaBoldCondensed';
+            src: local('FuturaStdBoldCondensed'), url('FuturaStdBoldCondensed.otf');
+        }
+        
+        html { font-size: 16px; }
+        
+        * { margin: 0 !important; padding: 0 !important; }
+        
+        body {
+            /* Background: */
+            background: #007C39;
+            font-family: FuturaBoldCondensed;
+            /* gradient: */
+            background-image: linear-gradient(-360deg, rgba(149,203,110,0.99) 0%, rgba(141,199,107,0.64) 48%, rgba(126,191,102,0.00) 100%);
+        }
+        
+        #container {
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        .number {
+            color: white;
+            font-size: 20rem;
+            text-shadow: 0px 0px 30px rgba(0,104,48,1);
+        }
+        
+        .hiddenVote {
+            display: none;
+        }
+        
+        /* FLEXBOX CSS */
+        .Aligner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="container" class="Aligner">
+        <div id="div1" class="number animated rubberBand hiddenVote">0</div>
+        <div id="div2" class="number animated rubberBand">0</div>
+    </div>
+    
+    <script src="js/jquery-3.1.1.min.js"></script>
+    
+    <script>
+        // counter variable with increment function
+        var counter = 0;
+        function updateCounter(){
+            counter++;
+        
+            if($("#div1").hasClass("hiddenVote")){
+                $("#div1").removeClass("hiddenVote");
+                $("#div2").addClass("hiddenVote");
+            } else {
+                $("#div1").addClass("hiddenVote");
+                $("#div2").removeClass("hiddenVote");
+            }
+        }
+        
+        // increment function
+        function incrementUp() {
+            $('#container').one("click", function() {
+                updateCounter();
+                $(".number").html(counter);
+                setTimeout(incrementUp, 2000);
+            });
+        }
+        
+        // run increment once document ready
+        $(document).ready(function(){
+            incrementUp();
+        });
+    </script>
+    
+</body>
+
+</html>
